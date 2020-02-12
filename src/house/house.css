@@ -1,4 +1,25 @@
-.price {
-    font-size: larger;
-    color: #D01110;
+.wrapper {
+    /*background: #f8cf2c;*/
+    border-radius: 0 0 1rem 1rem;
+    padding: 2rem;
+}
+
+.country {
+    font-weight: 400;
+    color: #335357;
+}
+
+.picture {
+    border-radius: 1rem;
+    width: inherit;
+    z-index: 2;
+}
+
+.property-info {
+    color: #ab202a;
+    background-color: white;
+    border: solid white 1px;
+    border-radius: 0.3rem;
+    padding-left: 0.5rem;
+    height: fit-content;
 }

@@ -1,13 +1,13 @@
 h1, h2, h3, h4, h5, h6, span, p, a {
-    font-family: "Nunito",Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: "Nunito", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .subtitle {
-  font-size: x-large;
-  color: #335357;
+    font-size: x-large;
+    color: #335357;
 }
 
 .featuredHouse {
-  border-radius: 2px;
-  background-color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
 }
