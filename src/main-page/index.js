@@ -3,6 +3,8 @@ import './main-page.css';
 import Header from "./header";
 import FeaturedHouse from "./featured-house";
 import HouseFilter from "./house-filter";
+import SearchResults from "../search-results";
+import House from "../house";
 
 class App extends Component {
     state = {}
@@ -16,11 +18,10 @@ class App extends Component {
         fetch('/houses.json')
             .then(res => res.json())
             .then(allHouses => {
-                console.log(allHouses)
                 this.allHouses = allHouses;
                 this.determineFeatureHouse();
                 this.determineUniqueCountries();
-            })
+            });
     }
 
     /* Picks a random house to display as the "Featured House" on the main page. */
@@ -44,24 +45,33 @@ class App extends Component {
 
     /* Filter houses by country. */
     filterHouses = (country) => {
+        this.setState({ activeHouse: null });
         const filteredHouses = this.allHouses.filter((h) => h.country === country);
         this.setState({filteredHouses});
         this.setState({country});
     }
 
+    /* Add selected house to state. */
     setActiveHouse = (house) => {
         this.setState({activeHouse: house})
     }
 
-  render(){
-      return (
-    <div className="container">
-      <Header subtitle="Providing houses world wide"/>
-      <HouseFilter countries={this.state.countries} filterHouses={this.filterHouses()}/>
-      <FeaturedHouse house={this.state.featuredHouse} />
-    </div>
-  );
-  }
+    render() {
+        let activeComponent = null;
+        if (this.state.country)
+            activeComponent = <SearchResults country={this.state.country}
+                                             filteredHouses={this.state.filteredHouses} setActiveHouse={this.setActiveHouse} />;
+        if (this.state.activeHouse)
+            activeComponent = <House house={this.state.activeHouse}/>;
+
+        return (
+            <div className="container">
+                <Header subtitle="Providing houses world wide"/>
+                <HouseFilter countries={this.state.countries} filterHouses={this.filterHouses}/>
+                { activeComponent ? activeComponent : <FeaturedHouse house={this.state.featuredHouse} />}
+            </div>
+        );
+    }
 }
 
 export default App;
